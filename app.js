@@ -1,10 +1,22 @@
-// Watch the Call Stack, Callback Queue, and Event Loop class
+// Watch the Call Stack, Callback Queue, and Event Loop class after finishing this app
 
-console.log('Starting')
-setTimeout(() => {
-    console.log('0 seconds')
-}, 0)
-setTimeout(() => {
-    console.log('2 seconds')
-}, 2000)
+const request = require('request')
+const geoCode = require('./geocode')
+const forecast = require('./forecast')
 
+geoCode('Iguaba Grande', (error, data) => {
+    if (error) {
+        console.log(error)
+    } else {
+        forecast(data.latitude, data.longitude, (error, data) => {
+            if (error) {
+                console.log(`Error : ${error}`)
+            } else {
+                console.log(data)
+            }
+        })
+    }
+
+
+
+})
